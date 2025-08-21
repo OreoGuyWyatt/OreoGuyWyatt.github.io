@@ -3,6 +3,8 @@ body {
     color: rgb(45, 45, 45);
     padding: 10px;
     font-family: Arial, sans-serif;
+    background-image: url(images/background.jpeg);
+    background-size:600px;
 }
 
 #all-contents {
@@ -12,11 +14,16 @@ body {
 
 /* navigation menu */
 nav {
-    background: rgb(0, 0, 0);
+    border-style:outset;
+    border-width:5px;
+    border-color:black;
+    border-radius:10px;
+    background: rgb(0, 0, 255);
     margin: 0 auto;
     display: flex;
     padding: 10px;
     margin-bottom: 20px;
+
 }
 
 h1 {
@@ -25,6 +32,16 @@ h1 {
     color: white;
     flex: 1;
     margin: 0;
+}
+
+#navheader{
+    display:flex;
+    color:beige;
+}
+
+.navp {
+    display:flex;
+    color:beige;
 }
 
 #nav-ul {
@@ -41,14 +58,19 @@ h1 {
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: beige;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px gold, 0 0 40px gold, 0 0 50px gold, 0 0 60px gold , 0 0 70px gold;
 }
 
 /* main container area beneath menu */
 main {
-    background: rgb(245, 238, 219);
+    background: rgb(0, 0, 0);
     display: flex;
     margin-top: 20px;
+    border-style:outset;
+    border-width:5px;
+    border-color:blue;
+    border-radius:10px;
 }
 
 .sidebar {
@@ -63,13 +85,16 @@ main {
 .content {
     flex: 1;
     padding: 15px;
+    color: white;
 }
 
 /* interests section styles */
-#interests {
-    border: 4px silver ridge;
-    padding: 8px;
+#Interests {
+    border: 4px white double;
+    padding: 10px;
     margin-top: 20px;
+    color: white;
+    border-radius:10px;
 }
 
 h2, h3 {
