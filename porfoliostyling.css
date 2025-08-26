@@ -1,0 +1,162 @@
+body {
+    background: rgb(20, 50, 205);
+    color: rgb(45, 45, 45);
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    background-image: url(images/background.jpeg);
+    background-size:305px;
+}
+.overflow{
+    width: 100%;
+    overflow-x:scroll;
+}
+.flex{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+
+}
+
+#all-contents {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* navigation menu */
+nav {
+    border-style:outset;
+    border-width:5px;
+    border-color:black;
+    border-radius:10px;
+    background: rgb(0, 0, 255);
+    margin: 0 auto;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    color: white;
+    flex: 1;
+    margin: 0;
+}
+
+#navheader{
+    display:flex;
+    color:beige;
+}
+
+.navp {
+    display:flex;
+    color:beige;
+}
+
+#nav-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+a {
+    text-decoration: none;
+    color: beige;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px gold, 0 0 40px gold, 0 0 50px gold, 0 0 60px gold , 0 0 70px gold;
+}
+
+/* main container area beneath menu */
+main {
+    background: rgb(0, 0, 0);
+    display: flex;
+    margin-top: 20px;
+    border-style:outset;
+    border-width:5px;
+    border-color:blue;
+    border-radius:10px;
+}
+
+.sidebar {
+    margin-right: 25px;
+    padding: 10px;
+}
+
+.sidebar-img {
+    width: 200px;
+}
+
+.contents {
+    flex: 1;
+    padding: 15px;
+    color: white;
+}
+
+/* interests section styles */
+#Interests {
+    border: 4px white double;
+    padding: 10px;
+    margin-top: 20px;
+    color: white;
+    border-radius:10px;
+}
+
+h2, h3 {
+    margin: 0px;
+}
+
+
+@media screen and (min-width: 120px) and (max-width: 1080px) {
+  main {
+    height: 100ch;
+    zoom: 1.5;
+    display: grid;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  h2 {
+    font-size: 42px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+
+  #all-contents {
+    height: 100ch;
+    margin: none;
+  }
+
+  a {
+    font-size: 42px;
+  }
+
+  .sidebar {
+    margin-right: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar-img {
+    width: 100%;
+  }
+
+  p,
+  li {
+    font-size: 24px;
+  }
+
+  .content {
+    align-content: center;
+    justify-content: center;
+  }
+}
