@@ -121,6 +121,8 @@ function changeAnimationType() {
     }
   }
 }
+let collected = 0;
+
 
 function debug() {
   debugVar = true;
@@ -391,6 +393,10 @@ function deathOfPlayer() {
   }
 }
 
+for (var i = 0; i < collectables.length; i++) {
+      collectables[i].collected = false;
+    }
+
 function playerFrictionAndGravity() {
   //max speed limiter for ground
   if (player.speedX > maxSpeed) {
@@ -523,6 +529,7 @@ function drawCollectables() {
       //draw the icons at the top if collected
       if (collectables[i].alpha > 0.4) {
         collectables[i].alpha = collectables[i].alpha - 0.007;
+      
       }
       ctx.globalAlpha = collectables[i].alpha;
       ctx.drawImage(
@@ -533,7 +540,49 @@ function drawCollectables() {
         collectableHeight
       );
       ctx.globalAlpha = 1;
+      collected ++;
+      checkfin();
     }
+function checkfin(){
+  collected = 0
+  player.x = 50;
+  player.y = 100;
+  player.speedX = 0;
+  player.speedY = 0;
+  player.onGround = false;
+  player.facingRight = true;
+  player.deadAndDeathAnimationDone = false;
+  ctx.clearRect(0, 0, 1800, 1800);
+  platforms = [];
+  cannons = [];
+  collectables = [];
+  lvl += 1;
+  levelsetup();
+}
+
+function levelsetup() {
+  if (lvl === 1) {
+    createPlatform(0, 650,400, 2, "red"),
+    createPlatform(400, 550, 2, 100, "red")
+    createPlatform(500, 650, 50, 2, "red")
+    createPlatform(550, 450, 50, 2, "red")
+    createPlatform(200, 350, 250, 2, "red")
+    createCollectable("database", 250, 300, 1, 0.7)
+  }
+  else if (lvl === 2) {
+    createPlatform(0, 400, 400, 2, "blue")
+
+  }
+  else {
+    lvl = 1;
+    levelsetup();
+  }
+
+  createPlatform(-50, -50, canvas.width + 100, 50); // top wall
+  createPlatform(-50, canvas.height - 10, canvas.width + 100, 200, "navy"); // bottom wall
+  createPlatform(-50, -50, 50, canvas.height + 500,"navy"); // left wall
+  createPlatform(canvas.width, -50, 50, canvas.height + 100); // right wall
+}
 
     // Horizontal movement logic for collectables
     if (collectables[i].minX !== null && collectables[i].maxX !== null) {
@@ -579,6 +628,7 @@ function collectablesCollide() {
       collectables[i].y + collectableHeight > player.y
     ) {
       collectables[i].collected = true;
+      
     }
   }
 }
