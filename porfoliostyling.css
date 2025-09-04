@@ -110,6 +110,30 @@ main {
 h2, h3 {
     margin: 0px;
 }
+.content h1 {
+  color: white;
+}
+
+#portfolio {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#portfolio li {
+  background: blue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#portfolio li:hover {
+  background: black;
+}
+
+#portfolio a {
+  text-decoration: none;
+  color: white;
+}
 
 
 @media screen and (min-width: 120px) and (max-width: 1080px) {
