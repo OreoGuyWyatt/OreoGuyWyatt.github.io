@@ -12,5 +12,27 @@
   <body id="body">
     <canvas id="canvas" width="1300" height="700"></canvas>
     <img id="button" src="images/button.jpeg" />
+  
+    <p>
+      total:
+    </p>
+    <p id="total"> 0 </p>
   </body>
+  <script>
+      function handleKeyDown(e) {
+        var number
+  keyPress.any = true;
+  if (e.key === " ") {
+    keyPress.space = true;
+    number ++
+  }}
+
+  function handleKeyUp(e) {
+  if (e.key === " ") {
+    keyPress.space = false;
+  }}
+
+  document.getElementById("id").innerHTML = "working?";
+    
+    </script>
 </html>
