@@ -260,12 +260,14 @@ function collision() {
       player.y + hitBoxHeight > platforms[i].y
     ) {
       //now that we know we have collided, we figure out the direction of collision
+      if(platforms[i].collides){
       result = resolveCollision(
         platforms[i].x,
         platforms[i].y,
         platforms[i].width,
         platforms[i].height
       );
+      }
     }
   }
   return result;
@@ -633,13 +635,14 @@ function collectablesCollide() {
   }
 }
 
-function createPlatform(x, y, width, height, color = "grey", minX = null, maxX = null, speed = 1) {
+function createPlatform(x, y, width, height, color = "grey", collides = true, minX = null, maxX = null, speed = 1) {
   platforms.push({ 
     x, 
     y, 
     width, 
     height, 
     color,
+    collides,
     minX,
     maxX,
     speed,
