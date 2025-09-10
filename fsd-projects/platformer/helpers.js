@@ -121,7 +121,7 @@ function changeAnimationType() {
     }
   }
 }
-let collected = 0;
+var playercollect = 0;
 
 
 function debug() {
@@ -542,8 +542,6 @@ function drawCollectables() {
         collectableHeight
       );
       ctx.globalAlpha = 1;
-      collected ++;
-      checkfin();
     }
 function checkfin(){
   collected = 0
@@ -630,7 +628,8 @@ function collectablesCollide() {
       collectables[i].y + collectableHeight > player.y
     ) {
       collectables[i].collected = true;
-      
+      playercollect ++;
+      checkfin();
     }
   }
 }
