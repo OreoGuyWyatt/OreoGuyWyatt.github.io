@@ -92,11 +92,10 @@ let halleImage;
 let animationDetails = {};
 
 var collectableList = {
-  database: { image: "images/collectables/database.png" },
-  diamond: { image: "images/collectables/diamond-head.png" },
-  grace: { image: "images/collectables/grace-head.png" },
+  oreo: { image: "images/collectables/cookie.jpeg" },
+  leaf: { image: "images/collectables/leaf.jpeg" },
+  water: { image: "images/collectables/water.png" },
   kennedi: { image: "images/collectables/kennedi-head.png" },
   max: { image: "images/collectables/max-head.png" },
   steve: { image: "images/collectables/steve-head.png" },
-  oreo: { image}
 };

@@ -628,8 +628,6 @@ function collectablesCollide() {
       collectables[i].y + collectableHeight > player.y
     ) {
       collectables[i].collected = true;
-      playercollect ++;
-      checkfin();
     }
   }
 }
