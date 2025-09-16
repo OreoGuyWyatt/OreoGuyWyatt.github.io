@@ -33,7 +33,7 @@ createPlatform(1200, 300, 100, 10, '#4c4a4f', true);
 createPlatform(100, 0, 10, 650, '#4c4a4f', true);
 createPlatform(100, 200, 100, 10, '#4c4a4f', true);
 createPlatform(300, 500, 100, 10, '#4c4a4f', true);
-createPlatform(400, 650, 100, 10, 'red', true);
+createPlatform(400, 640, 100, 10, '#4c4a4f', true);
 createPlatform(500, 550, 100, 10, '#4c4a4f', true);
 createPlatform(300, 300, 100, 10, '#4c4a4f', true);
 createPlatform(200, 300, 100, 10, '#4c4a4f', true);
