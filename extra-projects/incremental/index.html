@@ -11,28 +11,65 @@
 
   <body id="body">
     <canvas id="canvas" width="1300" height="700"></canvas>
-    <img id="button" src="images/button.jpeg" />
+    <button id = "button" onclick = "add()"> <img id="button" src="images/button.jpeg" /> </button>
+    <button id = "upgrade" onclick = "upgradets()" <img id="upgrade" src="images/database.png" /> </button>
   
     <p>
       total:
     </p>
-    <p id="total"> 0 </p>
-  </body>
+   <p id="total"></p>
+
   <script>
-      function handleKeyDown(e) {
-        var number
-  keyPress.any = true;
-  if (e.key === " ") {
-    keyPress.space = true;
-    number ++
-  }}
+    function setCookie(name, value) {
+      if (value === null){
+     value = 0;
+    }
+  document.cookie = `${name}=${value};`;
+};
 
-  function handleKeyUp(e) {
-  if (e.key === " ") {
-    keyPress.space = false;
-  }}
+function getCookie(wname) {
+  let name = wname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 
-  document.getElementById("id").innerHTML = "working?";
+}
+function checkCookie() {
+  let ss = getCookie("currentNum");
+  if (ss === "") {
+    setCookie("currentNum", total);
+  }
+}
+    var total;
+    var adder = 1;
+    show();
     
-    </script>
+    function add(){
+      total += adder;
+      setCookie("currentNum", total);
+      show();
+    }
+    function show(){
+      sTotal = parseInt(getCookie("currentNum"));
+      document.getElementById("total").innerHTML = sTotal;
+
+    }
+    function upgradets(upgrade){
+      if (upgrade === adderup) {
+        adder ++;
+      }
+    }
+
+
+  </script>
+  </body>
 </html>
