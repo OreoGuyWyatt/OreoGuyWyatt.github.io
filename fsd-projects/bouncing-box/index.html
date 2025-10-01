@@ -56,7 +56,8 @@
 
         // moves the Box to a new position on the screen along the X-Axis
         function moveBoxTo(newPositionX, newPositionY) {
-          box.css("left", newPositionX, newPositionY);
+          box.css("left", newPositionX);
+          box.css("top", newPositionY);
         }
 
         // changes the text displayed on the Box
@@ -71,8 +72,8 @@
         var yPos = 400;
         var score = 0;
         var speed = 10;
-        var revSpeed = -speed;
-
+        var boardHeight = jQuery(window).height();
+        var ySpeed = 10;
         // TODO 2 - Variable declarations
 
 
@@ -87,14 +88,32 @@
         function update() {
           moveBoxTo(xPos, yPos);
           xPos += speed;
-          yPos += speed;
+          yPos += ySpeed;
+          
           if (xPos >= boardWidth-70) {
-          speed *= -1;
+            speed *= -1;
           }
           if (xPos <= 0){
-          speed *= -1;
+            speed *= -1;
           }
-        
+          if (yPos <= 0){
+            ySpeed *= -1;
+          }
+          if (yPos >= boardHeight){
+            ySpeed *= -1
+          }
+          if (xPos >= boardWidth-70 && yPos <=0) {
+            alert("Woah Corner Bounce");
+          }
+          if (xPos >= boardWidth-70 && yPos >= boardHeight){
+            alert("Woah Corner Bounce");
+          } 
+          if (xPos <= 0 && yPos <= 0){
+            alert("Woah Corner Bounce");
+          }
+          if (xPos <= 0 && yPos >= boardHeight){
+            alert("Woah Corner Bounce");
+          }
 
           
         }
@@ -108,7 +127,9 @@
          */
         function handleBoxClick() {
           score ++;
-          xPos = 0;
+          xPos = Math.random() * 1250;
+          yPos = Math.random() * 649;
+
           changeBoxText(score);
           speed = 3 * score + 10;
 
