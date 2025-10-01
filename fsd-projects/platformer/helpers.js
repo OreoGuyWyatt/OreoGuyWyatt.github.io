@@ -804,18 +804,23 @@ function handleKeyDown(e) {
   keyPress.any = true;
   if (e.key === "ArrowUp" || e.key === "w") {
     keyPress.up = true;
+    document.getElementById("movement").innerHTML = ("up");
   }
   if (e.key === "ArrowLeft" || e.key === "a") {
     keyPress.left = true;
+    document.getElementById("movement").innerHTML = ("left");
   }
   if (e.key === "ArrowDown" || e.key === "s") {
     keyPress.down = true;
+    document.getElementById("movement").innerHTML = ("down");
   }
   if (e.key === "ArrowRight" || e.key === "d") {
     keyPress.right = true;
+    document.getElementById("movement").innerHTML = ("right");
   }
   if (e.key === " ") {
     keyPress.space = true;
+    document.getElementById("movement").innerHTML = ("woah");
   }
 }
 

@@ -5,71 +5,20 @@
     <title>incremental</title>
     <link href="incremental.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="helpers.js"></script>
     <script src="incremental.js"></script>
   </head>
 
-  <body id="body">
+  <body>
     <canvas id="canvas" width="1300" height="700"></canvas>
-    <button id = "button" onclick = "add()"> <img id="button" src="images/button.jpeg" /> </button>
-    <button id = "upgrade" onclick = "upgradets()" <img id="upgrade" src="images/database.png" /> </button>
-  
-    <p>
-      total:
-    </p>
-   <p id="total"></p>
+    <button id = "button" onclick = "add()" autofocus> <img id="button" src="images/button.jpeg" /> </button>
+    <button id = "upgrade" onclick = "buy('add', '1', '5')"> adder up: 5 </button>
+    <button id = "multiplier" onclick = "buy('mult', '1', '50')"> yuh: 50</button> 
+    <button id = "grandpa" onclick = "buy('grandpa', '1', '50')"> Buy Grandpa: 50</button>
 
-  <script>
-    function setCookie(name, value) {
-      if (value === null){
-     value = 0;
-    }
-  document.cookie = `${name}=${value};`;
-};
+   <p id="total">Click To Begin! </p>
+   <p id="addVal">Click To Begin! </p>
+   <p id="addMult">Click To Begin! </p>
+   <p id="grandpas">Click To Begin! </p>
 
-function getCookie(wname) {
-  let name = wname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-
-}
-function checkCookie() {
-  let ss = getCookie("currentNum");
-  if (ss === "") {
-    setCookie("currentNum", total);
-  }
-}
-    var total;
-    var adder = 1;
-    show();
-    
-    function add(){
-      total += adder;
-      setCookie("currentNum", total);
-      show();
-    }
-    function show(){
-      sTotal = parseInt(getCookie("currentNum"));
-      document.getElementById("total").innerHTML = sTotal;
-
-    }
-    function upgradets(upgrade){
-      if (upgrade === adderup) {
-        adder ++;
-      }
-    }
-
-
-  </script>
   </body>
 </html>

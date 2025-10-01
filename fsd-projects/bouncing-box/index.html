@@ -55,8 +55,8 @@
         box.on("click", handleBoxClick);
 
         // moves the Box to a new position on the screen along the X-Axis
-        function moveBoxTo(newPositionX) {
-          box.css("left", newPositionX);
+        function moveBoxTo(newPositionX, newPositionY) {
+          box.css("left", newPositionX, newPositionY);
         }
 
         // changes the text displayed on the Box
@@ -67,6 +67,11 @@
         //////////////////////////////////////////////////////////////////
         /////////////////// YOUR CODE BELOW HERE /////////////////////////
         //////////////////////////////////////////////////////////////////
+        var xPos = 0;
+        var yPos = 400;
+        var score = 0;
+        var speed = 10;
+        var revSpeed = -speed;
 
         // TODO 2 - Variable declarations
 
@@ -80,7 +85,15 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
-
+          moveBoxTo(xPos, yPos);
+          xPos += speed;
+          yPos += speed;
+          if (xPos >= boardWidth-70) {
+          speed *= -1;
+          }
+          if (xPos <= 0){
+          speed *= -1;
+          }
         
 
           
@@ -94,7 +107,10 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
-
+          score ++;
+          xPos = 0;
+          changeBoxText(score);
+          speed = 3 * score + 10;
 
 
 
