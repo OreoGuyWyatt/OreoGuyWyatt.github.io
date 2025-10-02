@@ -12,13 +12,3 @@ display: grid;
   text-align: center;
 }
 
-#player {
-  position: relative;
-}
-
-.move {
-  transform: translate(50px, 50px);
-}
-.moving {
-  transform: translate(-50px, -100px);
-}

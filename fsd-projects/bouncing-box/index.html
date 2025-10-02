@@ -27,8 +27,9 @@
   </head>
 
   <body class="board">
+    <p id="score"> Score: 0</p>
     <!-- HTML for the box -->
-    <div class="box">?</div>
+    <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
 
     <script>
       (function () {
@@ -49,7 +50,7 @@
         });
 
         // Every 50 milliseconds, call the update Function (see below)
-        setInterval(update, 50);
+        setInterval(update, 1);
 
         // Every time the box is clicked, call the handleBoxClick Function (see below)
         box.on("click", handleBoxClick);
@@ -62,7 +63,7 @@
 
         // changes the text displayed on the Box
         function changeBoxText(newText) {
-          box.text(newText);
+          document.getElementById("score").innerHTML = ("Score: " + score);
         }
 
         //////////////////////////////////////////////////////////////////
@@ -71,9 +72,12 @@
         var xPos = 0;
         var yPos = 400;
         var score = 0;
-        var speed = 10;
+        var speed = 10/ 50;
         var boardHeight = jQuery(window).height();
-        var ySpeed = 10;
+        var ySpeed = 10 / 50;
+        var countdown = 0;
+        var xPlace;
+        var yPlace;
         // TODO 2 - Variable declarations
 
 
@@ -90,7 +94,7 @@
           xPos += speed;
           yPos += ySpeed;
           
-          if (xPos >= boardWidth-70) {
+          if (xPos >= 1299) {
             speed *= -1;
           }
           if (xPos <= 0){
@@ -99,20 +103,20 @@
           if (yPos <= 0){
             ySpeed *= -1;
           }
-          if (yPos >= boardHeight){
+          if (yPos >= 700){
             ySpeed *= -1
           }
-          if (xPos >= boardWidth-70 && yPos <=0) {
-            alert("Woah Corner Bounce");
+          if (xPos >= 1299 && yPos <=0) {
+            //alert("Woah Corner Bounce");
           }
-          if (xPos >= boardWidth-70 && yPos >= boardHeight){
-            alert("Woah Corner Bounce");
+          if (xPos >= 1299 && yPos >= boardHeight){
+            //alert("Woah Corner Bounce");
           } 
           if (xPos <= 0 && yPos <= 0){
-            alert("Woah Corner Bounce");
+            //alert("Woah Corner Bounce");
           }
-          if (xPos <= 0 && yPos >= boardHeight){
-            alert("Woah Corner Bounce");
+          if (xPos <= 0 && yPos >= 700){
+            //alert("Woah Corner Bounce");
           }
 
           
@@ -129,10 +133,15 @@
           score ++;
           xPos = Math.random() * 1250;
           yPos = Math.random() * 649;
-
           changeBoxText(score);
-          speed = 3 * score + 10;
-
+          countdown ++;
+          if (countdown === 3){
+          yPlace = 3 * score + 10
+          xPlace = 2 * score + 10;
+          speed = xPlace / 50;
+          ySpeed = yPlace / 50;
+          countdown = 0;
+          }
 
 
         }

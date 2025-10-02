@@ -3,8 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>stuffs</title>
-    <link href="grids.css" rel="stylesheet" />
+    <style>
+      .player {
+        width: 70px;
+        height: 70px;
+        background-color: teal;
+        font-size: 300%;
+        text-align: center;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 100px;
+        /* Change me! */
+        left: 0px;
+      }
+    </style>
+    <link rel="stylesheet" href="grids.css" />
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="jquery.min.js"></script>
     <script src="grids.js"></script>
   </head>
 
@@ -75,12 +91,50 @@
     <div class="grid-item">Box 63</div>
     <div class="grid-item">Box 64</div>
     </div>
-    <img id="player"  src="images/cookie.jpeg" />
+    <img id="player" class = "player" src="images/cookie.jpeg" />
 
-    <button id = "up" onclick = "show()"> up</button>
-    <button id = "left" onclick = "show()"> left</button>
-    <button id = "down" onclick = "show()"> down</button>
+    <button id = "up" onclick = "up()"> up</button>
+    <button id = "left" onclick = "left()"> left</button>
+    <button id = "down" onclick = "down()"> down</button>
     <button id = "right" onclick = "right()"> right</button>
     <p id="tst">nope</p>
+
+    <script>
+      (function () {
+  "use strict";
+  var player = jQuery(".player");
+var xPos = 0;
+var yPos = 0;
+
+movePlayer(xPos, yPos);
+function up(){
+  document.getElementById("tst").innerHTML = ("up");
+  yPos-=100;
+  movePlayer(xPos, yPos);
+
+}
+function left(){
+  document.getElementById("tst").innerHTML = ("left");
+  xPos-=100;
+  movePlayer(xPos, yPos);
+}
+function down(){
+  document.getElementById("tst").innerHTML = ("down");
+  yPos+=100;
+  movePlayer(xPos, yPos);
+}
+function right(){
+  document.getElementById("tst").innerHTML = ("right");
+  xPos+=100;
+  movePlayer(xPos, yPos);
+
+}
+function movePlayer(newXPos, newYPos){
+  player.css ("left", newXPos);
+  player.css ("top", newYPos)
+}
+
+})();
+    </script>
   </body>
 </html>
