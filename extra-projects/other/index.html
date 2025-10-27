@@ -2,32 +2,21 @@
 <html>
   <head>
     <title>oreo guy's website</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="new.css" />
     <link rel="icon" type="image/x-icon" href="/images/Screenshot 2025-08-26 9.30.05 AM.png"/>
     <script src="jquery.min.js"></script>
     <script src="effects.js"></script>
+    <script type="module" src="stuffs.jsx"></script>
   </head>
   <body>
     <!-- All content goes here -->
     <div id="all-contents">
       <nav>
         <h1 id="navheader">About Oreo Guy</h1>
-        <ul id="nav-ul">
-          <li class="nav-li">
-            <a href="index.html" class="navp">Home</a>
-          </li>
-          <li class="nav-li">
-            <a href="portfolio.html" class="navp">Portfolio</a>
-          </li>
-          <li class="nav-li">
-            <a href="Extras.html"class="navp">Extras</a>
-          </li>
-        </ul>
       </nav>
       <main>
         <!--Page Content-->
         <div class="sidebar">
-          <img class="sidebarimage" src="images/cookiemonster.jpeg" />
         </div>
         <div class="contents">
           <h2>Wyatt Gaudin</h2>
@@ -42,6 +31,16 @@
             </ul>
           </div>
         </div>
+        <div>
+      <TargetCursor 
+        spinDuration={2}
+        hideDefaultCursor={true}
+      />
+      
+      <h1>Hover over the elements below</h1>
+      <button className="cursor-target">Click me!</button>
+      <div className="cursor-target">Hover target</div>
+    </div>
       </main>
     </div>
   </body>

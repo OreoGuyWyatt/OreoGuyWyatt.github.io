@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bouncing Box Game</title>
+    <script src="jquery.min.js"></script>
+    
+    <style>
+      .box {
+        width: 70px;
+        height: 70px;
+        background-color: teal;
+        font-size: 300%;
+        text-align: center;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 100px;
+        /* Change me! */
+        left: 0px;
+      }
+      .box2 {
+        background-color: teal;
+        width: 70px;
+        height: 70px;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 100px;
+        /* Change me! */
+        left: 0px;
+      }
+
+      .board {
+        height: 100vh;
+      }
+      canvas {
+  background-color: lightblue;
+  margin: 20px;
+  position:absolute;
+  left:8.15vw;
+  height: 45vw;
+  width: 83.7vw;
+  outline: auto;
+}
+    </style>
+    <!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  </head>
+
+  <body class="board">
+    <button id = "level"> Level Up Dot: 0</button>
+    <canvas id="canvas" width="1400" height="750"></canvas>
+    <p id="points"> Points: 0 </p>
+    <button id = "speed"> Buy Speed: 1</button>
+    <button id = "dot"> Buy dot</button>
+    <!-- HTML for the box -->
+    <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
+    <div id="dots">
+    <img class="box2" src="images/point-removebg-preview.png" />
+    </div>
+    <script>
+      (function () {
+        "use strict";
+        /* global jQuery */
+
+        //////////////////////////////////////////////////////////////////
+        /////////////////// SETUP DO NOT DELETE //////////////////////////
+        //////////////////////////////////////////////////////////////////67676767676767676767676767676767676767676767676767676767676767676767676
+        // reference to the HTML .box element
+        var objects = [jQuery(".box"),  jQuery(".box2")]
+        var board = jQuery(".board"); // reference to the HTML .board element
+        var boardWidth = board.width(); // the maximum X-Coordinate of the screen
+        
+
+        // update the boardWidth variable when the window is resized
+        jQuery(window).on("resize", function () {
+          boardWidth = board.width();
+        });
+
+        // Every 50 milliseconds, call the update Function (see below)
+        setInterval(update, 1);
+
+
+
+        $("#speed").click(function(){
+          buy("speed");
+        });
+
+
+        $("#dot").click(function(){
+          buy("dot");
+        });
+
+        $("#level").click(function(){
+          buy("dot level");
+        });
+
+        function buy(item){
+          if (item === "speed"){
+            if (points >= speedCost){
+              speedBuy();
+              points -= speedCost;
+              speedCost ++;
+              changeSpeedCost();
+              changePoints();
+            }
+            else{
+              alert("Not enough points");
+            }}
+          else if (item === "dot"){
+            if(points >= dotCost){
+              dot.push("dot" + dot.length);
+              newDot("dot" + dot[dot.length - 1]);
+              dot.push("dot" + dot.length);
+              dotLvl.push(1);
+              points-= dotCost;
+              dotCost += 10;
+              changeDotCost();
+              changePoints();
+            }
+            else{
+              alert("Not enough points");
+            }
+          }else if(item === "dot level"){
+            if(currentDotLvl >= dotLvl.length){
+              alert("Max level dots.");
+              currentDotLvl = dotlvl.length
+            }
+            else if (points >= dotLvlCost){
+              currentDotLvl ++;
+              points -= dotLvlCost;
+              dotLvlCost += 0;
+              pointMult *2;
+              changeDotLvlCost();
+              changePoints();
+
+            }
+            else{
+              alert("Not enough points")
+            }
+          }
+
+          }
+        
+        
+        // Every time the box is clicked, call the handleBoxClick Function (see below)
+
+        // moves the Box to a new position on the screen along the X-Axis
+        function moveBoxTo(newPositionX, newPositionY) {
+          objects[0].css("left", newPositionX);
+          objects[0].css("top", newPositionY);
+        }
+        function moveBoxTo2(newPositionX, newPositionY, dotx) {
+          dotx.css("left", newPositionX);
+          dotx.css("top", newPositionY);
+        }
+
+        // changes the text displayed on the Box
+        function changePoints() {
+          document.getElementById("points").innerHTML = ("Points: " + points);
+
+        }
+
+        function changeSpeedCost() {
+          document.getElementById("speed").innerHTML = ("Buy speed: " + speedCost);
+
+        }
+        function changeDotCost(){
+          document.getElementById("dot").innerHTML = ("Buy dot: " + dotCost)
+        }
+
+        function changeDotCost(){
+          document.getElementById("level").innerHTML = ("Level Up Dot: " + dotLvlCost)
+        }
+        //////////////////////////////////////////////////////////////////
+        /////////////////// YOUR CODE BELOW HERE /////////////////////////
+        //////////////////////////////////////////////////////////////////
+        var xPos = [500, 500];
+        var yPos = [300, 600];
+        var speed = 10/ 10;
+        var points = 9999;
+        var boardHeight = jQuery(window).height();
+        var ySpeed = 10/ 10 ;
+        var countdown = 0;
+        var xPlace;
+        var yPlace;
+        var speedCost = 1;
+        var speedBought = 1;
+        var dot = ["box", "dot"];
+        var dotCost = 1;
+        var dotsLevel = [0 , 1];
+        var dotLvl = ["background-color: teal; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;",
+        "background-color: green; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;", 
+        "background-color: red; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;",
+        "background-color: purple; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;",
+        "background-color: pink; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;",
+        ]
+        var currentDotLvl = 1;
+        var maxDotLvl = dotLvl.length;
+        var dotLvlCost = 0;
+        var placeHolder;
+        var pointAdd = 1;
+        var pointMult = 1;
+        moveBoxTo2(xPos[1], yPos[1], objects[1]);
+        changePoints();
+        
+        
+        function newDot(dots){
+          var $newimg = $('<img>');
+          $newimg.attr('src', 'images/point-removebg-preview.png');
+          $newimg.attr("class", dots);
+          $newimg.attr('style', "background-color: teal; width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;")
+          $("#dots").append($newimg);
+          xPos.push(500);
+          yPos.push(500);
+          objects.push(jQuery("." + dots));
+          dotsLevel.push(1);
+          updDot(xPos.length-1);
+          moveBoxTo2(xPos[xPos.length-1], yPos[yPos.length-1],objects[objects.length-1]);
+
+          
+
+        }
+
+        
+          
+        
+        function update() {
+          moveBoxTo(xPos[0], yPos[0]);
+          xPos[0] += speed;
+          yPos[0] += ySpeed;
+          
+          if (xPos[0] >= 1205) {
+            speed *= -1;
+          }
+          if (xPos[0] <= 130){
+            speed *= -1;
+          }
+          if (yPos[0] <= 35){
+            ySpeed *= -1;
+          }
+          if (yPos[0] >= 580){
+            ySpeed *= -1
+          }
+          for (let i = 1; i < xPos.length; i++) {
+
+            if (
+                xPos[0] >= xPos[i] - 70 &&
+                xPos[0] <= xPos[i] + 70 &&
+                yPos[0] >= yPos[i] - 70 &&
+                yPos[0] <= yPos[i] + 70
+              ) 
+              {
+                if (dotsLevel[i] !== currentDotLvl){
+                  updDot(i);
+                }
+                moveDot(true, true, i);
+                points += 1 * currentDotLvl;
+                changePoints();
+              }
+            }
+          }
+
+        function updDot(dot){
+          if (currentDotLvl > maxDotLvl){
+            objects[dot].attr('style', dotLvl[dotLvl.length-1]);
+          }
+          objects[dot].attr('style', dotLvl[currentDotLvl-1]);
+        }
+        /**
+         * This Function will be called each time the box is clicked.
+         * Each time it is called, it should perform each of the following actions:
+         * - increase the points total
+         * - increase the speed
+         * - move the box to the left side of the screen.
+         */
+        function moveDot(x, y, dot){
+          if (x && y){
+            xPos[dot] = Math.random() * 1205;
+            yPos[dot] = Math.random() * 580;
+          }
+          else if (x){
+            xPos[dot] = Math.random() * 1205;
+          }
+          else if (y){
+            yPos[dot] = Math.random() * 580;
+          }
+          if (xPos[dot] <= 130 && yPos[dot] <= 35){
+            moveDot(true, true, dot);
+          }
+          else if (xPos[dot] <= 130){
+            moveDot(true, false, dot);
+          }
+          else if (yPos[dot] <= 35){
+            moveDot(false, true, dot);
+          }
+          
+          
+          moveBoxTo2(xPos[dot], yPos[dot], objects[dot])
+          changePoints();
+        }
+        function handleBoxClick() {
+          xPos = Math.random() * 1250;
+          yPos = Math.random() * 649;
+          }
+          //left:130
+          //right:1205
+          //top:35
+          //bottom:580
+        function speedBuy(){
+          speedBought ++
+          yPlace = 3 * speedBought + 10;
+          xPlace = 2 * speedBought + 10;
+          speed = xPlace /10;
+          ySpeed = yPlace /10;
+        }
+        var speedCost = 1;
+        var speedBought = 1;
+
+        
+        
+      })();
+    </script>
+  </body>
+</html>

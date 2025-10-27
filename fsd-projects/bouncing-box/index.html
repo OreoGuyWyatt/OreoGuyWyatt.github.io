@@ -18,6 +18,19 @@
         /* Change me! */
         left: 0px;
       }
+      .box2 {
+        width: 70px;
+        height: 70px;
+        background-color: teal;
+        font-size: 300%;
+        text-align: center;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 100px;
+        /* Change me! */
+        left: 0px;
+      }
 
       .board {
         height: 100vh;
@@ -30,6 +43,7 @@
     <p id="score"> Score: 0</p>
     <!-- HTML for the box -->
     <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
+    <img class="box2" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
 
     <script>
       (function () {
@@ -41,6 +55,7 @@
         //////////////////////////////////////////////////////////////////
 
         var box = jQuery(".box"); // reference to the HTML .box element
+        var box2 = jQuery(".box2");
         var board = jQuery(".board"); // reference to the HTML .board element
         var boardWidth = board.width(); // the maximum X-Coordinate of the screen
 
@@ -54,11 +69,16 @@
 
         // Every time the box is clicked, call the handleBoxClick Function (see below)
         box.on("click", handleBoxClick);
+        box2.on("click", handleBoxClick);
 
         // moves the Box to a new position on the screen along the X-Axis
         function moveBoxTo(newPositionX, newPositionY) {
           box.css("left", newPositionX);
           box.css("top", newPositionY);
+        }
+        function moveBoxTo2(newPositionX, newPositionY) {
+          box2.css("left", newPositionX);
+          box2.css("top", newPositionY);
         }
 
         // changes the text displayed on the Box
@@ -78,17 +98,18 @@
         var countdown = 0;
         var xPlace;
         var yPlace;
+        var xPos2 = 500;
+        var yPos2 = 300;
+        moveBoxTo2(xPos2, yPos2);
         // TODO 2 - Variable declarations
 
 
 
 
 
-        /**
-         * This Function will be called 20 times/second.
-         * Each time it is called, it should move the Box to a new location.
-         * If the box drifts off the screen, turn it around!
-         */
+
+          
+        
         function update() {
           moveBoxTo(xPos, yPos);
           xPos += speed;
@@ -117,6 +138,11 @@
           }
           if (xPos <= 0 && yPos >= 700){
             //alert("Woah Corner Bounce");
+          }
+          if (xPos >= xPos2 - 70 && xPos <= xPos2 + 70 && yPos >= yPos2 - 70 && yPos <= yPos2 + 70){
+          xPos2 = Math.random() * 1250;
+          yPos2 = Math.random() * 649;
+          moveBoxTo2(xPos2, yPos2)
           }
 
           
