@@ -49,10 +49,13 @@
 
   <body class="board">
     <button id = "level"> Level Up Dot: 0</button>
+    <button id = "reset"> Reset guy: </button>
+    <button id = "speed"> Buy Speed: 1</button>
+    <button id = "dot"> Buy dot: </button>
     <canvas id="canvas" width="1400" height="750"></canvas>
     <p id="points"> Points: 0 </p>
-    <button id = "speed"> Buy Speed: 1</button>
-    <button id = "dot"> Buy dot</button>
+    
+    
     <!-- HTML for the box -->
     <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
     <div id="dots">
@@ -95,6 +98,9 @@
           buy("dot level");
         });
 
+        $("#reset").click(function(){
+          reset();
+        });
         function buy(item){
           if (item === "speed"){
             if (points >= speedCost){
@@ -141,7 +147,10 @@
           }
 
           }
-        
+        function reset(){
+          xPos[0] = 500
+          yPos[0] = 300
+        }
         
         // Every time the box is clicked, call the handleBoxClick Function (see below)
 
@@ -166,11 +175,11 @@
 
         }
         function changeDotCost(){
-          document.getElementById("dot").innerHTML = ("Buy dot: " + dotCost)
+          document.getElementById("dot").innerHTML = ("Buy dot: " + dotCost);
         }
 
         function changeDotCost(){
-          document.getElementById("level").innerHTML = ("Level Up Dot: " + dotLvlCost)
+          document.getElementById("level").innerHTML = ("Level Up Dot: " + dotLvlCost);
         }
         //////////////////////////////////////////////////////////////////
         /////////////////// YOUR CODE BELOW HERE /////////////////////////
