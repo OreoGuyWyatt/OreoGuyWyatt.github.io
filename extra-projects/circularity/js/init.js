@@ -24,6 +24,10 @@ var init = function (window) {
         var circle;
         var circles = [];
 
+        var chaser = [];
+        var runner = [];
+        var choose = 0;
+
         // TODO 2 : Create a function that draws a circle 
         
         function drawCircle(number){
@@ -32,11 +36,20 @@ var init = function (window) {
             physikz.addRandomVelocity(circle, canvas, 5, 5);
             view.addChild(circle);
             circles.push(circle);
+            
+            if (choose === 0){
+                chaser.push(circle);
+                choose = 1;
+            }
+            else{
+                runner.push(circle);
+                choose = 0;
+            }
             }
         }
 
         // TODO 3 : Call the drawCircle() function
-        drawCircle(100);
+        drawCircle(10000000000);
 
 
         // TODO 7 : Use a loop to create multiple circles
@@ -58,21 +71,11 @@ var init = function (window) {
             for(var i = 0; i <= circles.length-1; i ++){
                 physikz.updatePosition(circles[i]);
             }
-
-            // physikz.updatePosition(circles[0]);
-            // physikz.updatePosition(circles[1]);
-            // physikz.updatePosition(circles[2]);
-            // physikz.updatePosition(circles[3]);
-            // physikz.updatePosition(circles[4]);
             // TODO 5 : Call game.checkCirclePosition() on your circles
            for(var i = 0; i <= circles.length-1; i ++){
                 game.checkCirclePosition(circles[i]);
             }
-            // game.checkCirclePosition(circles[0]);
-            // game.checkCirclePosition(circles[1]);
-            // game.checkCirclePosition(circles[2]);
-            // game.checkCirclePosition(circles[3]);
-            // game.checkCirclePosition(circles[4]);
+
             // TODO 8 / TODO 9 : Iterate over the array
            
             
@@ -84,7 +87,7 @@ var init = function (window) {
         it to the opposite side of the screen.
         */
         game.checkCirclePosition = function(circle) {
-            
+
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width + circle.radius) {
                 circle.x = -circle.radius;

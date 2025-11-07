@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bouncing Box Game</title>
+    <script src="jquery.min.js"></script>
+    
+    <style>
+
+      body{
+        background-image: url("images/MonkeyMeadow.jpeg");
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .box {
+        width: 10px;
+        height: 10px;
+        background-color: teal;
+        font-size: 300%;
+        text-align: center;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 100px;
+        /* Change me! */
+        left: 0px;
+      }
+
+      .board {
+        height: 100vh;
+      }
+      canvas {
+  background-color: lightblue;
+  margin: 20px;
+  position:absolute;
+  left:8.15vw;
+  height: 45vw;
+  width: 83.7vw;
+  outline: auto;
+}
+    </style>
+    <!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  </head>
+
+  <body class="board">
+    
+    
+    <!-- HTML for the box -->
+    <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
+    <p id = "turn"> </p>
+    <div id="enemys"> 
+      <!-- all made enemys will be put here-->
+    </div>
+    <button id = slow> Spawn Slow Enemy:</button>
+    <button id = medium> Spawn Medium Enemy:</button>
+    <button id = fast> Spawn Fast Enemy:</button>
+    <script>
+      (function () {
+        "use strict";
+        /* global jQuery */
+
+        //////////////////////////////////////////////////////////////////
+        /////////////////// SETUP DO NOT DELETE //////////////////////////
+        //////////////////////////////////////////////////////////////////67676767676767676767676767676767676767676767676767676767676767676767676
+        // reference to the HTML .box element
+        var objects = [jQuery(".box")];
+        var enemys = [];
+        var board = jQuery(".board"); // reference to the HTML .board element
+        var boardWidth = board.width(); // the maximum X-Coordinate of the screen
+        
+
+        // update the boardWidth variable when the window is resized
+        jQuery(window).on("resize", function () {
+          boardWidth = board.width();
+        });
+
+        // Every 50 milliseconds, call the update Function (see below)
+        setInterval(update, 1);
+        
+        // Every time the box is clicked, call the handleBoxClick Function (see below)
+
+        // moves the Box to a new position on the screen along the X-Axis
+        function moveBoxTo(newPositionX, newPositionY) {
+          objects[0].css("left", newPositionX);
+          objects[0].css("top", newPositionY);
+        }
+        function moveEnemy(newPositionX, newPositionY, enemyX) {
+          enemyX.css("left", newPositionX);
+          enemyX.css("top", newPositionY);
+        }
+
+        // changes the text displayed on the Box
+        //////////////////////////////////////////////////////////////////
+        /////////////////// YOUR CODE BELOW HERE /////////////////////////
+        //////////////////////////////////////////////////////////////////
+
+        var forTheClass = ["enemy"];
+        $("#slow").click(function(){
+          spawn(forTheClass[0] + forTheClass.length, 0.5, 50, 100);
+        });
+        
+        $("#medium").click(function(){
+          var speedPlace = 1
+          spawn(forTheClass[0] + forTheClass.length, 1, 10, 10);
+        });
+
+        $("#fast").click(function(){
+          var speedPlace = 2
+          spawn(forTheClass[0] + forTheClass.length, 2, 15, 10);
+        });
+      
+        // start: Y
+        // turn 1: X
+        // turn 2: Y
+        // turn 3: X
+        // turn 4: Y
+        // turn 5: X
+        // turn 6: Y
+        // turn 7: X
+        // turn 8: Y
+        // turn 9: X
+        // turn 10: Y
+        // turn 11: X
+        // end: Y
+
+        // 0 = start, 1 - 11 = turn, 12 = end
+        var xPos = [0,505,505,335,335,165,165,645,645,770,770,460,460]; 
+        var yPos = [270,270,120,120,525,525,380,380,220,220,475,475,650];
+        var speedPlace;
+
+        var enemyX = [];
+        var enemyY = [];
+        var currentTurn = [];
+        var speed = [];
+        var damages = [];
+        var health = [];
+
+        var hitPoints = 200;
+        var boardHeight = jQuery(window).height();
+
+        moveBoxTo(0, 270)
+        var $newimgs = [$('<img>')];
+        function spawn(enemyNum, speeds, damage, healths){
+          $newimgs[enemys.length].attr('src', 'images/point-removebg-preview.png');
+          $newimgs[enemys.length].attr("class", enemyNum);
+          $newimgs[enemys.length].attr('style', "width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;")
+          $("#enemys").append($newimgs[enemys.length]);
+          enemyX.push(xPos[0]);
+          enemyY.push(yPos[0]);
+          damages.push(damage);
+          health.push(healths);
+          speed.push(speeds);
+          currentTurn.push(0);
+          enemys.push(jQuery("." + enemyNum));
+          $newimgs.push($('<img>'))
+          forTheClass.push("one")
+          moveEnemy(enemyX[enemyX.length-1], enemyY[enemyY.length-1],enemys[enemys.length-1]);
+          
+        }
+        function update() {  
+          document.getElementById("turn").innerHTML = (hitPoints);
+        for (var i = 0; i < currentTurn.length; i++ ){
+          
+          
+         if (currentTurn[i] === 0){
+            moveEnemy(enemyX[i], enemyY[i], enemys[i]);
+            enemyX[i] += speed[i];
+            if (enemyX[i] >= xPos[1]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }         
+          else if (currentTurn[i] === 1){
+            moveEnemy(enemyX [i], enemyY[i], enemys[i]);
+            enemyY[i] -= speed[i];
+            if (enemyY[i] <= yPos[2]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 2){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyX[i] -= speed[i];
+            if (enemyX[i] <= xPos[3]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 3){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyY[i] += speed[i];
+            if (enemyY[i] >= yPos[4]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 4){
+            moveEnemy(enemyX[i], enemyY[i], enemys[i]);
+            enemyX[i] -= speed[i];
+            if (enemyX[i] <= xPos[5]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }         
+          else if (currentTurn[i] === 5){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyY[i] -= speed[i];
+            if (enemyY[i] <= yPos[6]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 6){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyX[i] += speed[i];
+            if (enemyX[i] >= xPos[7]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 7){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyY[i] -= speed[i];
+            if (enemyY[i] <= yPos[8]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 8){
+            moveEnemy(enemyX[i], enemyY[i], enemys[i]);
+            enemyX[i] += speed[i];
+            if (enemyX[i] >= xPos[9]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }         
+          else if (currentTurn[i] === 9){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyY[i] += speed[i];
+            if (enemyY[i] >= yPos[10]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 10){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyX[i] -= speed[i];
+            if (enemyX[i] <= xPos[11]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyX[i] = xPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 11){
+            moveEnemy(enemyX[i] , enemyY[i], enemys[i]);
+            enemyY[i] += speed[i];
+            if (enemyY[i] >= yPos[12]){
+              currentTurn[i] = currentTurn[i] + 1;
+              enemyY[i] = yPos[currentTurn[i]];
+            }
+          }
+          else if (currentTurn[i] === 12){
+            damage(damages[i]);
+            kill(i);
+          }
+
+          
+
+        }
+
+        }
+        function kill (enemyNum){
+          $newimgs[enemyNum].remove();
+          $newimgs.splice(enemyNum,1);
+          enemys.splice(enemyNum,1);
+          enemyX.splice(enemyNum,1);
+          enemyY.splice(enemyNum,1);
+          currentTurn.splice(enemyNum,1);
+          damages.splice(enemyNum,1);
+          health.splice(enemyNum,1);
+          speed.splice(enemyNum,1);
+        }
+        
+        function damage(amount){
+          hitPoints = hitPoints - amount;
+          if (hitPoints <= 0){
+            lose();
+          }
+        }
+
+        function lose(){
+
+        }
+        /**
+         * This Function will be called each time the box is clicked.
+         * Each time it is called, it should perform each of the following actions:
+         * - increase the points total
+         * - increase the speed
+         * - move the box to the left side of the screen.
+         */
+        
+          
+          
+          
+        
+      })();
+    </script>
+  </body>
+</html>
