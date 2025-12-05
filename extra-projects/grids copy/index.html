@@ -45,15 +45,17 @@
   <body class="board">
     
     
-    <!-- HTML for the box -->
-    <img class="box" src="images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png" />
     <p id = "turn"> </p>
     <div id="enemys"> 
       <!-- all made enemys will be put here-->
     </div>
+    <div id="towers">
+      
+    </div>
     <button id = slow> Spawn Slow Enemy:</button>
     <button id = medium> Spawn Medium Enemy:</button>
     <button id = fast> Spawn Fast Enemy:</button>
+    <button id = magicman> Spawn Magic Man:</button>
     <script>
       (function () {
         "use strict";
@@ -88,25 +90,44 @@
           enemyX.css("left", newPositionX);
           enemyX.css("top", newPositionY);
         }
-
+        function moveTower(newPositionX, newPositionY, towerNumber) {
+          towerNumber.css("left", newPositionX);
+          towerNumber.css("top", newPositionY);
+        }
         // changes the text displayed on the Box
         //////////////////////////////////////////////////////////////////
         /////////////////// YOUR CODE BELOW HERE /////////////////////////
         //////////////////////////////////////////////////////////////////
 
         var forTheClass = ["enemy"];
+        var forTowerClass = ["tower"];
         $("#slow").click(function(){
-          spawn(forTheClass[0] + forTheClass.length, 0.5, 50, 100);
+          spawnEnemy(forTheClass[0] + forTheClass.length, 0.5, 50, 100);
         });
         
         $("#medium").click(function(){
           var speedPlace = 1
-          spawn(forTheClass[0] + forTheClass.length, 1, 10, 10);
+          spawnEnemy(forTheClass[0] + forTheClass.length, 1, 10, 10);
         });
 
         $("#fast").click(function(){
           var speedPlace = 2
-          spawn(forTheClass[0] + forTheClass.length, 2, 15, 10);
+          spawnEnemy(forTheClass[0] + forTheClass.length, 2, 15, 10);
+        });
+        var clicker = 0;
+        $("#magicman").click(function(){
+        document.addEventListener('click', function(event) {
+          // if (event){
+          //   clicker ++;
+          // }
+          
+        const x = event.clientX; // X coordinate relative to the viewport
+        const y = event.clientY; // Y coordinate relative to the viewport
+        spawnTower(forTowerClass[0] + forTowerClass.length, 'images/Screenshot_2025-10-01_12.30.31_PM-removebg-preview.png', 2, 0.5, 10, x, y);
+        clicker = 0;
+        }, 
+        // { once: true }
+      );
         });
       
         // start: Y
@@ -135,12 +156,22 @@
         var damages = [];
         var health = [];
 
+
+
+        var towerX = [];
+        var towerY = [];
+        var towers = [];
+        var towerDamage = [];
+        var towerFireRate = [];
+        var towerRange = [];
+
+
         var hitPoints = 200;
         var boardHeight = jQuery(window).height();
 
         moveBoxTo(0, 270)
         var $newimgs = [$('<img>')];
-        function spawn(enemyNum, speeds, damage, healths){
+        function spawnEnemy(enemyNum, speeds, damage, healths){
           $newimgs[enemys.length].attr('src', 'images/point-removebg-preview.png');
           $newimgs[enemys.length].attr("class", enemyNum);
           $newimgs[enemys.length].attr('style', "width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;")
@@ -155,7 +186,22 @@
           $newimgs.push($('<img>'))
           forTheClass.push("one")
           moveEnemy(enemyX[enemyX.length-1], enemyY[enemyY.length-1],enemys[enemys.length-1]);
-          
+        }
+        var $newtowerimgs = [$('<img>')];
+        function spawnTower(towerNum, tower, damage, FireRate, range, x, y){
+          $newtowerimgs[towers.length].attr('src', tower);
+          $newtowerimgs[towers.length].attr("class", towerNum);
+          $newtowerimgs[towers.length].attr('style', "width: 70px; height: 70px; user-select: none; display: block; position: absolute; top: 100px; left: 0px;")
+          $("#towers").append($newtowerimgs[towers.length]);
+          towerX.push(x);
+          towerY.push(y);
+          towerDamage.push(damage);
+          towerFireRate.push(FireRate);
+          towerRange.push(range)
+          towers.push(jQuery("." + towerNum));
+          $newtowerimgs.push($('<img>'))
+          forTowerClass.push("one")
+          moveTower(towerX[towerX.length-1], towerY[towerY.length-1],towers[towers.length-1]);
         }
         function update() {  
           document.getElementById("turn").innerHTML = (hitPoints);

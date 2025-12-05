@@ -1,0 +1,188 @@
+#deck{
+    display:flex;
+}
+
+#clubs {
+    /* display:flex; */
+    height: 10%;
+    width: auto;
+    object-fit: contain;
+    display:flex;
+}
+#diamonds {
+    /* display:none; */
+    height: 10%;
+    width: auto;
+    object-fit: contain;
+    display:flex;
+}
+#hearts {
+    /* display:none; */
+    height: 10%;
+    width: auto;
+    object-fit: contain;
+    display:flex;
+}
+#spades {
+    /* display:none; */
+    height: 10vh;
+    width: auto;
+    object-fit: contain;
+    display:flex;
+}
+#C2{
+    display:none
+}
+#C3{
+    display:none
+}
+#C4{
+    display:none
+}
+#C5{
+    display:none
+}
+#C6{
+    display:none
+}
+#C7{
+    display:none
+}
+#C8{
+    display:none
+}
+#C9{
+    display:none
+}
+#C10{
+    display:none
+}
+#CJ{
+    display:none
+}
+#CQ{
+    display:none
+}
+#CK{
+    display:none
+}
+#CA{
+    display:none
+}
+#D2{
+    display:none
+}
+#D3{
+    display:none
+}
+#D4{
+    display:none
+}
+#D5{
+    display:none
+}
+#D6{
+    display:none
+}
+#D7{
+    display:none
+}
+#D8{
+    display:none
+}
+#D9{
+    display:none
+}
+#D10{
+    display:none
+}
+#DJ{
+    display:none
+}
+#DQ{
+    display:none
+}
+#DK{
+    display:none
+}
+#DA{
+    display:none
+}
+#H2{
+    display:none
+}
+#H3{
+    display:none
+}
+#H4{
+    display:none
+}
+#H5{
+    display:none
+}
+#H6{
+    display:none
+}
+#H7{
+    display:none
+}
+#H8{
+    display:none
+}
+#H9{
+    display:none
+}
+#H10{
+    display:none
+}
+#HJ{
+    display:none
+}
+#HQ{
+    display:none
+}
+#HK{
+    display:none
+}
+#HA{
+    display:none
+}
+#S2{
+    display:none
+}
+#S3{
+    display:none
+}
+#S4{
+    display:none
+}
+#S5{
+    display:none
+}
+#S6{
+    display:none
+}
+#S7{
+    display:none
+}
+#S8{
+    display:none
+}
+#S9{
+    display:none
+}
+#S10{
+    display:none
+}
+#SJ{
+    display:none
+}
+#SQ{
+    display:none
+}
+#SK{
+    display:none
+}
+#SA{
+    display:none
+}

@@ -29,7 +29,12 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
-      
+        var tree;
+        var buildings = [];
+        var percentX = canvasWidth / 100;
+        // 1 percent of chromebook screen is 13.67
+        var percentY = canvasHeight / 100;
+        // 1 percent of chromebook screen is _ UNFULLSCREEN
       
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -39,17 +44,65 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+            // var bg = jQuery("#background");
+            // bg.attr('style', "height: 100%");
+            var bg = draw.bitmap("img/Screenshot 2025-11-21 9.34.44 AM.png");
+            bg.x = 0;
+            bg.y = 0;
+            bg.scaleX = 3.1;
+            bg.scaleY = 3.1;     
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight, 'white');
             background.addChild(backgroundFill);
+            // background.addChild(bg);
+
+            var legendaryJokers = {
+                "Canio": draw.bitmap("img/Joker Canio"),
+                "Chicot": draw.bitmap("img/Joker Chicot"),
+                "Perkeo": draw.bitmap("img/Joker Perkeo"), 
+                "Triboulet": draw.bitmap("img/Joker Triboulet"), 
+                "Yorick": draw.bitmap("img/Joker Yorick")
+            }
             
+            
+            // for (var images in legendaryJokers){
+            //     images.x = 300;
+            //     images.y = 200;
+            //     images.scaleX = 1;
+            //     images.scaleY = 1;   
+            //     background.addChild(images)
+            // }
             // TODO 2: - Add a moon and starfield
             
-            
+            var moon2 = draw.bitmap("img/moon.png");
+            moon2.x = percentX * 73.1;
+            moon2.y = percentY * 15;
+            moon2.scaleX = 0.5;
+            moon2.scaleY = 0.5;
+            background.addChild(moon2);
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             
-            
+            for (var i = 0; i < 5; i++) {
+            var buildingHeight = 300;
+            var building = draw.rect(75, buildingHeight, "LightGray", "Black", 1);
+            building.x = percentX * 14.63 * i;
+            building.y = groundY - buildingHeight;
+            background.addChild(building);
+            buildings.push(building);
+            }   
             // TODO 3: Part 1 - Add a tree
             
+            tree = draw.bitmap("img/tree.png");
+            tree.x = 0;
+            tree.y = 0;
+            background.addChild(tree);
+            
+            // perkeo = draw.bitmap("img/Joker Perkeo");
+            // perkeo.x = 0;
+            // perkeo.x = 0;
+            // background.addChild(perkeo);
+            
+
+
             
         } // end of render function - DO NOT DELETE
         
@@ -61,14 +114,23 @@ var background = function (window) {
             var canvasWidth = app.canvas.width;
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
+           
+            tree.x = tree.x - percentX * 0.36;
             
-            // TODO 3: Part 2 - Move the tree!
-            
-            
-            // TODO 4: Part 2 - Parallax
-            
+            if (tree.x < percentX * -14.63) {
+                tree.x = canvasWidth;
+            }
+           
 
-        } // end of update function - DO NOT DELETE
+
+          for (var i = 0; i < buildings.length; i++) {
+            var eachElement = buildings[i];
+            eachElement.x  = eachElement.x - percentX * 0.73
+            if (eachElement.x < percentX * -14.63){
+                eachElement.x = canvasWidth;
+             }            
+            }
+         } // end of update function - DO NOT DELETE
         
         
         
