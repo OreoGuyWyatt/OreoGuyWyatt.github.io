@@ -46,22 +46,14 @@ var background = function (window) {
             // you should modify both the height and color to suit your game
             // var bg = jQuery("#background");
             // bg.attr('style', "height: 100%");
-            var bg = draw.bitmap("img/Screenshot 2025-11-21 9.34.44 AM.png");
+            var bg = draw.bitmap("img/Balatro Background.png");
             bg.x = 0;
             bg.y = 0;
             bg.scaleX = 3.1;
             bg.scaleY = 3.1;     
             var backgroundFill = draw.rect(canvasWidth,canvasHeight, 'white');
             background.addChild(backgroundFill);
-            // background.addChild(bg);
-
-            var legendaryJokers = {
-                "Canio": draw.bitmap("img/Joker Canio"),
-                "Chicot": draw.bitmap("img/Joker Chicot"),
-                "Perkeo": draw.bitmap("img/Joker Perkeo"), 
-                "Triboulet": draw.bitmap("img/Joker Triboulet"), 
-                "Yorick": draw.bitmap("img/Joker Yorick")
-            }
+            background.addChild(bg);
             
             
             // for (var images in legendaryJokers){
