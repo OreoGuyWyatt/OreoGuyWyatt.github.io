@@ -1,24 +1,30 @@
 #deck{
+    height: 10vh;
+    width: auto;
+    object-fit: contain;
     display:flex;
+}
+.players{
+    align-items: center;
 }
 
 #clubs {
     /* display:flex; */
-    height: 10%;
+    height: 10vh;
     width: auto;
     object-fit: contain;
     display:flex;
 }
 #diamonds {
     /* display:none; */
-    height: 10%;
+    height: 10vh;
     width: auto;
     object-fit: contain;
     display:flex;
 }
 #hearts {
     /* display:none; */
-    height: 10%;
+    height: 10vh;
     width: auto;
     object-fit: contain;
     display:flex;
@@ -29,6 +35,9 @@
     width: auto;
     object-fit: contain;
     display:flex;
+}
+#Back{
+    display:none
 }
 #C2{
     display:none
@@ -54,7 +63,7 @@
 #C9{
     display:none
 }
-#C10{
+#C1{
     display:none
 }
 #CJ{
@@ -93,7 +102,7 @@
 #D9{
     display:none
 }
-#D10{
+#D1{
     display:none
 }
 #DJ{

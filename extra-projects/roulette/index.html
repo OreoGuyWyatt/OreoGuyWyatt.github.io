@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>incremental</title>
-    <link href="roulette.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  </head>
-
-  <body>
-    <div>
-        <img id = wheel src="img/roulettewheel-removebg-preview.png" />
-    </div>
+    <title>oreo guy's website</title>
+    <link rel="stylesheet" href="roulette.css" />
+    <link rel="icon" type="image/x-icon" href="/images/Screenshot 2025-08-26 9.30.05 AM.png"/>
     <script src="roulette.js"></script>
-  </body>
+  </head>
+  <body>
+<div id="game-container">
+    <div id="stats-panel">
+        <h2>Bankroll: <span id="money">$500</span></h2>
+        <p>Luck: +5</p>
+    </div>
+
+    <div id="wheel-container">
+        <div id="pointer"></div>
+        <div id="wheel">
+            <img src="img/roulettewheel-removebg-preview.png" id="wheel-img" style="width:100%">
+        </div>
+        <button onclick="spinWheel()">Place Bet & Spin</button>
+    </div>
+
+    <div id="upgrade-menu">
+        <h3>Black Market Upgrades</h3>
+        <div class="upgrade-item">
+            <strong>Weighted Ball</strong>
+            <p>+10% chance for Red</p>
+        </div>
+        <div class="upgrade-item">
+            <strong>Double Down</strong>
+            <p>Payouts x2, but lose 2x on fail</p>
+        </div>
+    </div>
+</div>
+</body>
 </html>
